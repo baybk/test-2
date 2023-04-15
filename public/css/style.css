@@ -1,0 +1,106 @@
+body {
+  margin-top: 59px; }
+
+.navbar .nav-item {
+  padding-right: 1.4rem; }
+
+.navbar {
+  box-shadow: 2px 2px 5px #3292a6;
+  opacity: 0.9;
+  background: #fff; }
+
+#showcase {
+  background: url("../img/mountains.jpg"); }
+
+.overlay {
+  background: rgba(147, 147, 147, 0.8); }
+
+.bg-gray-bit {
+  background: #fff; }
+
+.info-header {
+  width: 50%;
+  border-bottom: 2px solid #d3d1d1;
+  margin: auto; }
+
+#authors .card:hover {
+  background: #3292a6;
+  color: #fff; }
+#authors .card img {
+  margin-top: -50px; }
+
+#form-contact .fas {
+  font-size: 1.4rem; }
+
+@media (max-width: 768px) {
+  #showcase h1 {
+    font-size: 3rem; }
+
+  #section-four-box .card {
+    margin-bottom: 1rem; } }
+.limit {
+  height: 600px;
+  overflow: hidden; }
+
+.jp-text-recom {
+  font-size: 0.7rem; }
+
+.jp-title-recom {
+  font-size: 0.8rem; }
+
+.bg-yellow {
+  background: #FFCC21; }
+
+.text-yellow {
+  color: #FFCC21; }
+
+.card-record {
+  border: 15px solid #FFCC21; }
+
+.card-img-overlay-record {
+  background: rgba(88, 85, 85, 0.9);
+  border-radius: 0; }
+
+.group-text-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap; }
+
+.table-exercise {
+  background-color: #4a4a4a;
+  font-size: 0.9rem;
+  padding: -1px 1rem;
+  max-height: 200px; }
+
+.table-custom-dark {
+  color: #fff; }
+
+.diary-box {
+  min-height: 170px;
+  border: 1px solid #a5a4a4;
+  padding: 10px; }
+
+.link-active {
+  color: #FFCC21 !important;
+}
+
+.table td {
+  font-size: 0.9rem;
+}
+
+#summary-api img {
+  border: 2px solid #333;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 992px) {
+  #showcase h1 {
+    font-size: 4rem; } }
+@media (max-width: 1200px) {
+  #showcase h1 {
+    font-size: 4rem; }
+
+  .row .row1 {
+    padding-bottom: 10rem; } }

@@ -1,0 +1,21 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Services\Task;
+
+class DummyClass extends Task
+{
+    public function __construct($repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Logic to handle the data
+     */
+    public function run()
+    {
+        //
+    }
+}
