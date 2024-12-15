@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 services:
   app:
@@ -9,18 +9,54 @@ services:
       context: ./
       dockerfile: Dockerfile
     image: arenttest
-    container_name: arenttest-app
-    restart: unless-stopped
+    container_name: ${PROJECT_NAME}_app
+    restart: ${CTN_RESTART_MODE}
     working_dir: /var/www/
     volumes:
       - ./:/var/www
     networks:
       - arenttest
 
+  nginx:
+    image: nginx:alpine
+    container_name: ${PROJECT_NAME}_nginx
+    restart: ${CTN_RESTART_MODE}
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx/app:/etc/nginx/conf.d/
+    networks:
+      - arenttest
+    
+  app2:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: arenttest
+    container_name: ${PROJECT_NAME}_app2
+    restart: ${CTN_RESTART_MODE}
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - arenttest
+
+  nginx2:
+    image: nginx:alpine
+    container_name: ${PROJECT_NAME}_nginx2
+    restart: ${CTN_RESTART_MODE}
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx/app2:/etc/nginx/conf.d/
+    networks:
+      - arenttest
+
   db:
     image: mysql:8.0
-    container_name: arenttest-db
-    restart: unless-stopped
+    container_name: ${PROJECT_NAME}_db
+    restart: ${CTN_RESTART_MODE}
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -30,21 +66,24 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-      # - ./docker-compose/mysqlconf/my.conf:/etc/my.conf:z
     networks:
       - arenttest
     ports:
       - "3306:3306"
 
-  nginx:
-    image: nginx:alpine
-    container_name: arenttest-nginx
-    restart: unless-stopped
-    ports:
-      - 8000:80
+  nginxlb:
+    image: nginx:1.17.8-alpine
+    container_name: ${PROJECT_NAME}_nginxlb
     volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./docker-compose/nginx/nginxlb/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker-compose/ssl_certs/:/usr/local/nginx/conf/:ro
+    restart: ${CTN_RESTART_MODE}
+    ports:
+      - "10190:80"
+      - "10193:443"
+    depends_on:
+      - nginx
+      - nginx2
     networks:
       - arenttest
 
