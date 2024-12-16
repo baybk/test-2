@@ -21,6 +21,8 @@ services:
     image: nginx:alpine
     container_name: ${PROJECT_NAME}_nginx
     restart: ${CTN_RESTART_MODE}
+    depends_on:
+      - app
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/app:/etc/nginx/conf.d/
@@ -47,6 +49,8 @@ services:
     image: nginx:alpine
     container_name: ${PROJECT_NAME}_nginx2
     restart: ${CTN_RESTART_MODE}
+    depends_on:
+      - app2
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/app2:/etc/nginx/conf.d/
